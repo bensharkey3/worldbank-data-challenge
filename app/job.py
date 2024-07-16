@@ -14,7 +14,7 @@ page = 1
 print("getting initial response from url...")
 response = requests.get(f"{url}&page={page}")
 
-while response.status_code == 200 and len(gdp_data) > 0 and page < 4:
+while response.status_code == 200 and len(gdp_data) > 0:
     response = requests.get(f"{url}&page={page}")
     data = requests.get(f"{url}&page={page}").json()
     gdp_data = data[1]
@@ -82,3 +82,4 @@ conn.commit()
 print("closing connection...")
 cur.close()
 conn.close()
+print("completed")

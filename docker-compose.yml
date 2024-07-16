@@ -1,7 +1,6 @@
 services:
     db:
         image: postgres
-        # restart: unless-stopped
         hostname: "db"
         environment:
             POSTGRES_DB: postgres
@@ -9,12 +8,8 @@ services:
             POSTGRES_PASSWORD: mypassword
         ports:
             - '5432:5432'
-        # volumes:
-        #     - pgdata:/var/lib/postgresql/data
     etl:
         build: ./app .
         depends_on:
             - db
         command: python /app/job.py
-# volumes:
-#     pgdata:
