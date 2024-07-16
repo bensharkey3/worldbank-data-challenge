@@ -1,7 +1,8 @@
 services:
     db:
         image: postgres
-        restart: unless-stopped
+        # restart: unless-stopped
+        hostname: "db"
         environment:
             POSTGRES_DB: postgres
             POSTGRES_USER: postgres
