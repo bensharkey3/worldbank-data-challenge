@@ -1,3 +1,4 @@
+print("importing packages...")
 import requests
 import pandas as pd
 import psycopg2
@@ -10,6 +11,7 @@ gdp_data = ['placeholder']
 all_gdp_data = []
 page = 1
 
+print("getting initial response from url...")
 response = requests.get(f"{url}&page={page}")
 
 while response.status_code == 200 and len(gdp_data) > 0:
@@ -24,6 +26,7 @@ else:
 
 df = pd.json_normalize(all_gdp_data)
 
+print("connecting to db using psycopg2...")
 conn = psycopg2.connect(
     dbname="postgres", 
     user="postgres", 
@@ -34,6 +37,7 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 
+print("executing drop and create table statements...")
 cur.execute("""
     drop table if exists gdp_alldata
     ;
@@ -55,6 +59,7 @@ cur.execute("""
 
 tuples = [tuple(x) for x in df.to_numpy()]
 
+print("executing import query...")
 insert_query = """
     insert into gdp_alldata (
         countryiso3code,
@@ -73,5 +78,7 @@ insert_query = """
 
 execute_values(cur, insert_query, tuples)
 conn.commit()
+
+print("closing connection...")
 cur.close()
 conn.close()
