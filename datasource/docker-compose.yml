@@ -9,7 +9,7 @@ services:
         ports:
             - '5432:5432'
     etl:
-        build: ./app .
+        build: .
         depends_on:
             - db
-        command: python /app/job.py
+        command: python /job.py
