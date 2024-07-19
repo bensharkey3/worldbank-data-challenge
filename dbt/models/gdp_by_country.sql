@@ -12,6 +12,7 @@ add_prev_gdp AS (
     FROM {{ ref('stg_gdp_alldata') }}
     WHERE country != ''
         AND gdp != 'NaN'
+	and year::int >= 2000
     ORDER BY country, year
 ),
 
@@ -28,7 +29,6 @@ find_min_max_growths AS (
         MIN(gdp_growth) AS min_gdp_growth_since_2000,
         MAX(gdp_growth) AS max_gdp_growth_since_2000
     FROM add_gdp_growth
-    WHERE year::int >= 2000
     GROUP BY
         country
 ),
