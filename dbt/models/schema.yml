@@ -6,3 +6,10 @@ sources:
     schema: public
     tables:
       - name: gdp_alldata
+        columns:
+          - name: countryiso3code
+            data_tests:
+              - not_null
+          - name: date
+            data_tests:
+              - not_null
