@@ -1,4 +1,4 @@
-{{ config(materialized = 'able') }}
+{{ config(materialized = 'table') }}
 
 WITH
 add_prev_gdp AS (
