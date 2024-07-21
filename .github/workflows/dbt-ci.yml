@@ -1,7 +1,7 @@
 name: dbt CI pipeline
 on: [push, pull_request]
 jobs:
-  ci-tests:
+  dbt-ci:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -15,6 +15,5 @@ jobs:
         uses: py-actions/py-dependency-install@v4
         with:
           path: ".github/workflows/requirements.txt"
-      - name: compile queries
-        run: dbt parse
-
+      - name: compile run and test dbt model
+        run: dbt build --full-refresh --profiles-dir ./dbt

@@ -1,0 +1,12 @@
+worldbank_data_challenge:
+  outputs:
+    dev:
+      dbname: postgres
+      host: localhost
+      pass: mypassword
+      port: 5432
+      schema: public
+      threads: 1
+      type: postgres
+      user: postgres
+  target: dev
