@@ -1,7 +1,7 @@
 name: 'worldbank_data_challenge'
 version: '1.0.0'
 
-profile: 'orldbank_data_challenge'
+profile: 'worldbank_data_challenge'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
