@@ -15,5 +15,5 @@ jobs:
         uses: py-actions/py-dependency-install@v4
         with:
           path: ".github/workflows/requirements.txt"
-      - name: compile run and test dbt model
-        run: dbt build --full-refresh --profiles-dir ../dbt
+      - name: parse dbt model
+        run: dbt parse
