@@ -16,4 +16,4 @@ jobs:
         with:
           path: ".github/workflows/requirements.txt"
       - name: parse dbt model
-        run: dbt parse --project-dir ./dbt
+        run: dbt parse --project-dir ../dbt
