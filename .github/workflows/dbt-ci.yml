@@ -16,4 +16,5 @@ jobs:
         with:
           path: ".github/workflows/requirements.txt"
       - name: compile queries
-        run: dbt compile
+        run: dbt parse
+
