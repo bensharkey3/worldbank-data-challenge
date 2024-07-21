@@ -12,7 +12,7 @@ add_prev_gdp AS (
     FROM {{ ref('stg_gdp_alldata') }}
     WHERE country != ''
         AND gdp != 'NaN'
-	and year::int >= 2000
+        AND year::int >= 2000
     ORDER BY country, year
 ),
 
