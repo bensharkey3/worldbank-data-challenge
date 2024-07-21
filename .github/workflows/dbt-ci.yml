@@ -15,9 +15,5 @@ jobs:
         uses: py-actions/py-dependency-install@v4
         with:
           path: ".github/workflows/requirements.txt"
-      # - name: install Python dependencies
-      #   run: pip install --no-cache-dir -r .github\workflows\requirements.txt
-      - name: install dbt deps
-        run: dbt deps
       - name: compile queries
         run: dbt compile
