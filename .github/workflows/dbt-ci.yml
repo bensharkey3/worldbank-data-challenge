@@ -12,7 +12,11 @@ jobs:
         with:
           python-version: "3.9"
       - name: install Python dependencies
-        run: pip install --no-cache-dir -r .github\workflows\requirements.txt
+        uses: py-actions/py-dependency-install@v4
+        with:
+          path: "requirements.txt"
+      # - name: install Python dependencies
+      #   run: pip install --no-cache-dir -r .github\workflows\requirements.txt
       - name: install dbt deps
         run: dbt deps
       - name: compile queries
