@@ -16,4 +16,4 @@ jobs:
         with:
           path: ".github/workflows/requirements.txt"
       - name: compile run and test dbt model
-        run: dbt build --full-refresh --profiles-dir ./dbt
+        run: dbt build --full-refresh --profiles-dir /dbt
