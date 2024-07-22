@@ -19,14 +19,14 @@ Steps involved include:
 The thought process behind my approach was to build a solution that was modular and reusable, hence utilising Docker for the database creation and ETL script. I wanted to minimise the amount of custom code and leverage existing tools and packages as much as possible, however the ETL script needed to be custom Python code. Using dbt I wanted to ensure I was following established dbt conventions, by settind up the postgres db as a dbt 'source', also using a stg_ view to clean source data before use in the model containing logic, also aligning with dbt SQL code formatting standards. I used sqlfluff on my local to ensure the code was formatted correctly.
 
 ### Assumptions
-To be able to run this project yourself, you will need:
+To be able to run this project according to the build steps outlined below, you will need:
 * Windows machine
-* Docker installed
+* Docker desktop
 * dbt installed with dbt-postgres adapter
 
 ### Build Steps
 * Clone this repository to your local Windows machine
-* Running `cd datasource && create_datasource.bat` will build a Postges db, and run a Python script to populate it with World Bank data. Takes approx. 5min to complete. You can monitor progress within Docker desktop
+* Running `cd datasource && create_datasource.bat` will build a Postges db, and run a Python script to populate it with World Bank data. Takes approx. 5min to complete. Progress can be monitored within Docker desktop
 * Run `cd dbt && dbt build` to change into the dbt directory, and build the dbt models and run dbt tests
 * When completed run `cd datasource && docker compose down` to terminate the database
 * Refer to gdp_by_country.csv for the output of the gdp_by_country dbt data model
@@ -39,3 +39,4 @@ Given the approx. 4hrs of total time spent developing, there are a number of lim
 * CI parses the dbt project, but does not connect to the database and create models or run data tests
 * Code linting not setup as part of the CI process 
 * CD not implemented
+* Using cloud services instead of a local machine to host Docker and dbt would be a better solution
