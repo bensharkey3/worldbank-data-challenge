@@ -16,7 +16,13 @@ Steps involved include:
 * Creating a branch and then a Pull Request to trigger a CI build before merging into main branch
 
 ### Description
-The thought process behind my approach was to build a solution that was modular and reusable, hence utilising Docker for the database creation and ETL script. I wanted to minimise the amount of custom code and leverage existing tools and packages as much as possible, however the ETL script needed to be custom Python code. Using dbt I wanted to ensure I was following established dbt conventions, by settind up the postgres db as a dbt source, also using a stg_ view to clean source data before use in the model containing logic, also aligning with dbt SQL code formatting standards. I used sqlfluff on my local to ensure the code was formatted correctly.
+The thought process behind my approach was to build a solution that was modular and reusable, hence utilising Docker for the database creation and ETL script. I wanted to minimise the amount of custom code and leverage existing tools and packages as much as possible, however the ETL script needed to be custom Python code. Using dbt I wanted to ensure I was following established dbt conventions, by settind up the postgres db as a dbt 'source', also using a stg_ view to clean source data before use in the model containing logic, also aligning with dbt SQL code formatting standards. I used sqlfluff on my local to ensure the code was formatted correctly.
+
+### Assumptions
+To be able to run this project yourself, you will need:
+* Windows machine
+* Docker installed
+* dbt installed with dbt-postgres adapter
 
 ### Build Steps
 * Clone this repository to your local Windows machine
@@ -24,11 +30,6 @@ The thought process behind my approach was to build a solution that was modular 
 * Run `cd dbt && dbt build` to change into the dbt directory, and build the dbt models and run dbt tests
 * When completed run `cd datasource && docker compose down` to terminate the database
 * Refer to gdp_by_country.csv for the output of the gdp_by_country dbt data model
-
-### Assumptions
-* Windows machine
-* Docker installed
-* dbt installed with dbt-postgres adapter
 
 ### Limitations
 Given the approx. 4hrs of total time spent developing, there are a number of limitations with the project, including:
