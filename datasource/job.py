@@ -10,8 +10,8 @@ MAX_RETRIES=5
 BASE_DELAY=1
 
 
-def get_total_pages():
-    response = requests.get(f"{url}&page=1")
+def get_total_pages(url):
+    data = requests.get(f"{url}&page=1").json()
     return data[0]['pages']
 
 
@@ -106,7 +106,8 @@ def write_df_to_db(df, cur):
 
 if __name__ == '__main__':
     print('getting total pages...')
-    total_pages = get_total_pages()
+    total_pages = get_total_pages(URL)
+    print('total pages: {total_pages}')
     print('getting data from api...')
     df = get_data_with_retry(URL, total_pages, MAX_RETRIES, BASE_DELAY)
     print('connecting to db...')
