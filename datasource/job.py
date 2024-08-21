@@ -107,7 +107,7 @@ def write_df_to_db(df, conn, cur):
 if __name__ == '__main__':
     print('getting total pages...')
     total_pages = get_total_pages(URL)
-    print('total pages: {total_pages}')
+    print(f'total pages: {total_pages}')
     print('getting data from api...')
     df = get_data_with_retry(URL, total_pages, MAX_RETRIES, BASE_DELAY)
     print('connecting to db...')
