@@ -10,8 +10,17 @@ MAX_RETRIES=5
 BASE_DELAY=1
 
 
-def get_total_pages(url):
-    data = requests.get(f"{url}&page=1").json()
+def get_total_pages(url, max_retries, base_delay):
+    for attempt in range(max_retries):
+        try:
+            data = requests.get(f"{url}&page=1").json()
+        except requests.exceptions.RequestException as e:
+            if attempt == max_retries:
+                raise e
+                
+            delay = min(base_delay * (attempt**2))
+            time.sleep(delay)
+            print(f"no response from api, trying again with attempt: {attempt}")
     return data[0]['pages']
 
 
@@ -37,6 +46,7 @@ def get_data_with_retry(url, total_pages, max_retries, base_delay):
                     
                 delay = min(base_delay * (attempt**2))
                 time.sleep(delay)
+                print(f"no response from api, trying again with attempt: {attempt}")
 
     df = pd.json_normalize(all_gdp_data)
     return df
@@ -106,7 +116,7 @@ def write_df_to_db(df, conn, cur):
 
 if __name__ == '__main__':
     print('getting total pages...')
-    total_pages = get_total_pages(URL)
+    total_pages = get_total_pages(URL, MAX_RETRIES, BASE_DELAY)
     print(f'total pages: {total_pages}')
     print('getting data from api...')
     df = get_data_with_retry(URL, total_pages, MAX_RETRIES, BASE_DELAY)
@@ -116,4 +126,3 @@ if __name__ == '__main__':
     execute_drop_and_create_tables(cur)
     print('writing df to db...')
     write_df_to_db(df, conn, cur)
-    
