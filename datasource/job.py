@@ -111,7 +111,7 @@ if __name__ == '__main__':
     print('getting data from api...')
     df = get_data_with_retry(URL, total_pages, MAX_RETRIES, BASE_DELAY)
     print('connecting to db...')
-    conn, cur = connect_to_db()
+    cur, conn = connect_to_db()
     print('executing create and drop tables...')
     execute_drop_and_create_tables(cur)
     print('writing df to db...')
